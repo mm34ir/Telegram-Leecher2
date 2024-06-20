@@ -43,7 +43,7 @@ from colab_leecher.utility.variables import (
 
 async def task_starter(message, text):
     global BOT
-    await message.delete()
+    # await message.delete()
     BOT.State.started = True
     if BOT.State.task_going == False:
         src_request_msg = await message.reply_text(text)
@@ -53,7 +53,7 @@ async def task_starter(message, text):
             "I am already working ! Please wait until I finish !!"
         )
         await sleep(15)
-        await msg.delete()
+        # await msg.delete()
         return None
 
 
@@ -146,7 +146,7 @@ async def taskScheduler():
     Messages.src_link = f"https://t.me/c/{Messages.link_p}/{MSG.sent_msg.id}"
     Messages.task_msg += f"__[{BOT.Mode.type.capitalize()} {BOT.Mode.mode.capitalize()} as {BOT.Setting.stream_upload}]({Messages.src_link})__\n\n"
 
-    await MSG.status_msg.delete()
+    # await MSG.status_msg.delete()
     img = Paths.THMB_PATH if ospath.exists(Paths.THMB_PATH) else Paths.HERO_IMAGE
     MSG.status_msg = await colab_bot.send_photo(  # type: ignore
         chat_id=OWNER,
