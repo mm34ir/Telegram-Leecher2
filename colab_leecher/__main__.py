@@ -18,7 +18,7 @@ src_request_msg = None
 
 @colab_bot.on_message(filters.command("start") & filters.private)
 async def start(client, message):
-    await message.delete()
+    # await message.delete()
     text = "**Hey There, 👋🏼 It's Colab Leecher**\n\n◲ I am a Powerful File Transloading Bot 🚀\n◲ I can Transfer Files To Telegram or Your Google Drive From Various Sources 🦐"
     keyboard = InlineKeyboardMarkup(
         [
@@ -34,7 +34,7 @@ async def start(client, message):
     await message.reply_text(text, reply_markup=keyboard)
 
 
-@colab_bot.on_message(filters.command("tupload") & filters.private)
+@colab_bot.on_message(filters.command("l") & filters.private)
 async def telegram_upload(client, message):
     global BOT, src_request_msg
     BOT.Mode.mode = "leech"
@@ -67,7 +67,7 @@ async def directory_upload(client, message):
     src_request_msg = await task_starter(message, text)
 
 
-@colab_bot.on_message(filters.command("ytupload") & filters.private)
+@colab_bot.on_message(filters.command("ytdl") & filters.private)
 async def yt_upload(client, message):
     global BOT, src_request_msg
     BOT.Mode.mode = "leech"
@@ -81,7 +81,7 @@ async def yt_upload(client, message):
 @colab_bot.on_message(filters.command("settings") & filters.private)
 async def settings(client, message):
     if message.chat.id == OWNER:
-        await message.delete()
+        # await message.delete()
         await send_settings(client, message, message.id, True)
 
 
@@ -93,13 +93,13 @@ async def setPrefix(client, message):
         BOT.State.prefix = False
 
         await send_settings(client, message, message.reply_to_message_id, False)
-        await message.delete()
+        # await message.delete()
     elif BOT.State.suffix:
         BOT.Setting.suffix = message.text
         BOT.State.suffix = False
 
         await send_settings(client, message, message.reply_to_message_id, False)
-        await message.delete()
+        # await message.delete()
 
 
 @colab_bot.on_message(filters.create(isLink) & ~filters.photo)
@@ -112,7 +112,7 @@ async def handle_url(client, message):
     BOT.Options.unzip_pswd = ""
 
     if src_request_msg:
-        await src_request_msg.delete()
+        # await src_request_msg.delete()
     if BOT.State.task_going == False and BOT.State.started:
         temp_source = message.text.splitlines()
 
@@ -147,7 +147,7 @@ async def handle_url(client, message):
             quote=True,
         )
     elif BOT.State.started:
-        await message.delete()
+        # await message.delete()
         await message.reply_text(
             "<i>I am Already Working ! Please Wait Until I finish 😣!!</i>"
         )
@@ -307,7 +307,7 @@ async def handle_options(client, callback_query):
         )
 
     elif callback_query.data == "close":
-        await callback_query.message.delete()
+         await callback_query.message.delete()
     elif callback_query.data == "back":
         await send_settings(
             client, callback_query.message, callback_query.message.id, False
@@ -409,7 +409,7 @@ async def unzip_pswd(client, message):
         )
 
     await sleep(15)
-    await message_deleter(message, msg)
+    #await message_deleter(message, msg)
 
 
 @colab_bot.on_message(filters.command("help") & filters.private)
@@ -439,7 +439,7 @@ async def help_command(client, message):
         ),
     )
     await sleep(15)
-    await message_deleter(message, msg)
+    # await message_deleter(message, msg)
 
 
 logging.info("Colab Leecher Started !")
